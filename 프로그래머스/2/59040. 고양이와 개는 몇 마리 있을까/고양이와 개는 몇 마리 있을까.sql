@@ -1,0 +1,10 @@
+-- 코드를 입력하세요
+SELECT ANIMAL_TYPE, COUNT(*) AS "count"
+FROM ANIMAL_INS
+GROUP BY ANIMAL_TYPE
+ORDER BY
+CASE
+WHEN ANIMAL_TYPE = "Cat" then 1
+when ANIMAL_TYPE = "Dog" then 2
+else 3
+end asc
