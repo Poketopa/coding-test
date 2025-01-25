@@ -7,18 +7,19 @@ class Solution {
         int openingEnd = changeTime(op_end);
 
         for(int i=0;i<commands.length;i++){
-            if(now < 0) now = 0;
-            if(now > video_length) now = video_length;
             if(openingStart <= now && now <= openingEnd){
                 now = openingEnd;
             }
-            if(commands[i].equals("next")) now += 10;
-            else if(commands[i].equals("prev")) now -= 10;
-
+            if(commands[i].equals("next")){
+                now += 10;
+                if(now > video_length) now = video_length;
+            }
+            else if(commands[i].equals("prev")) {
+                now -= 10;
+                if(now < 0) now = 0;
+            }
         }
-        if(now < 0) now = 0;
-        if(now > video_length) now = video_length;
-        if(openingStart <= now && now <= openingEnd){
+        if(openingStart <= now && now <= openingEnd) {
             now = openingEnd;
         }
 
