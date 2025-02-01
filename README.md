@@ -33,10 +33,11 @@ This repository is designed to systematically document and share coding test pro
 ![image](https://github.com/user-attachments/assets/1a41a392-ac9a-4984-aa4b-a2fcd5fa8273)
 
 **2024.12.25**
-![image](https://github.com/user-attachments/assets/017b2aea-adb7-4384-a2ca-74843d87cbb6)
+
+![image](https://github.com/user-attachments/assets/a6a6f463-7fe5-4629-9de2-fd85f916f3e3)
 
 **2024.12.31**
-![image](https://github.com/user-attachments/assets/a6a6f463-7fe5-4629-9de2-fd85f916f3e3)
+
 
 **2025.01.15**
 ![image](https://github.com/user-attachments/assets/6689f4ef-95f0-4246-bfe1-d604b8093bb1)
