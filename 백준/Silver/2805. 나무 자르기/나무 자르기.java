@@ -1,5 +1,4 @@
 
-
 import java.io.*;
 import java.util.*;
 
@@ -29,10 +28,16 @@ public class Main {
                 if(mid >= length[i]) continue;
                 sum += length[i] - mid;
             }
-            if(sum >= need){
+            if(sum == need){
+                System.out.println(mid);
+                return;
+            }
+            else if(sum > need){
+                answer = mid;
                 start = mid + 1;
             }
             else{
+                answer = mid;
                 end = mid - 1;
             }
         }
