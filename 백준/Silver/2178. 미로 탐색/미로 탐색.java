@@ -9,8 +9,8 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         //StringTokenizer st = new StringTokenizer(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int yLen = Integer.parseInt(st.nextToken());
-        int xLen = Integer.parseInt(st.nextToken());
+        int yLen = Integer.valueOf(st.nextToken());
+        int xLen = Integer.valueOf(st.nextToken());
 
         int[][] maze = new int[yLen][xLen];
         int[][] visited = new int[yLen][xLen];
