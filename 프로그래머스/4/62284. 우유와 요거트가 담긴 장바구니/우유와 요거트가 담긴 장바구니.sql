@@ -1,0 +1,13 @@
+SELECT
+    A.CART_ID
+FROM
+    CART_PRODUCTS A
+JOIN
+    CART_PRODUCTS B
+ON
+    A.CART_ID = B.CART_ID
+WHERE
+    A.NAME = 'Milk' AND B.NAME = 'Yogurt'
+    
+ORDER BY
+    CART_ID
