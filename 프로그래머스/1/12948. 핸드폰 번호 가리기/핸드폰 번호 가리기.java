@@ -1,16 +1,10 @@
-import java.util.*;
-
 class Solution {
     public String solution(String phone_number) {
-        String[] array = phone_number.split("");
-        for(int i=0;i<array.length-4;i++){
-            array[i] = "*";
-        }
         String answer = "";
-        for (String i:array){
-            answer+=i;
+        for(int i=0;i<phone_number.length()-4;i++) answer += "*";
+        for(int i=phone_number.length()-4;i<phone_number.length();i++){
+            answer += String.valueOf(phone_number.charAt(i));
         }
-
         return answer;
     }
 }
