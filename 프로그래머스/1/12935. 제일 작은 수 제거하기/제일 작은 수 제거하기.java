@@ -1,22 +1,15 @@
-import java.util.*;
-
 class Solution {
     public int[] solution(int[] arr) {
-        if(arr.length == 1){
-            int[] answer = new int[1];
-            answer[0] = -1;
-            return answer;
+        if(arr.length == 1) return new int[]{-1};
+        int min = Integer.MAX_VALUE;
+        for(int i : arr) if(min > i) min = i;
+        int[] answer = new int[arr.length-1];
+        int idx = 0;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i] == min) continue;
+            answer[idx] = arr[i];
+            idx++;
         }
-        int min = Arrays.stream(arr).min().getAsInt();
-        
-        List<Integer> newList = new ArrayList<>();
-        for (int i : arr){
-            if (i == min){
-                continue;
-            }
-            newList.add(i);
-        }
-        int[] answer = newList.stream().mapToInt(i -> i).toArray();
         return answer;
     }
 }
