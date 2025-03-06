@@ -1,3 +1,5 @@
+[![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=lhs5427ll)](https://solved.ac/lhs5427ll/)
+
 # 🖥️ Coding Test Solutions Repository
 
 ![Languages](https://img.shields.io/badge/Language-Python%20%7C%20Java-brightgreen)
