@@ -1,8 +1,7 @@
 def solution(A,B):
+    sum = 0
     A.sort()
-    B.sort(reverse = True)
-    sum =0
-    for x,y in zip(A,B):
-        sum += x*y
-
+    B.sort()
+    for i in range(0, len(A)):
+        sum += A[i] * B[len(B)-i -1]
     return sum
