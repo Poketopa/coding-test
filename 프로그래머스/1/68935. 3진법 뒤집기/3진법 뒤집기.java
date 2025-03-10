@@ -1,20 +1,17 @@
+import java.util.*;
 class Solution {
     public int solution(int n) {
-        String three = "";
-        while(true){
-            int remain = n%3;
-            three += remain;
-            n /= 3;
-            if(n==0){
-                break;
-            }
+        List<Integer> list = new ArrayList<>();
+        while(n>0){
+            list.add(n%3);
+            n/=3;
         }
-        int index =1;
-        int sum=0;
-        for(int i=three.length()-1;i>=0;i--){
-            sum+=index*((int)three.charAt(i)-48);
-            index *=3;
+        int num = 1;
+        int answer = 0;
+        for(int i=list.size()-1;i>=0;i--){
+            answer += num*list.get(i);
+            num *= 3;
         }
-        return sum;
+        return answer;
     }
 }
