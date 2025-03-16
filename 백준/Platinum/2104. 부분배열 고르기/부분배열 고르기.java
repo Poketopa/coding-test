@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.util.*;
 
@@ -29,22 +30,20 @@ public class Main {
     }
 
     /** ✅ 최대 점수 찾기 (분할 정복) */
-    private static long findMaxScore(int left, int right){
-        if(left > right) return 0;
+    private static long findMaxScore(int start, int end){
+        if(start > end) return 0;
 
-        // 현재 구간의 최소값 위치 찾기
-        int minIndex = queryMin(1, 1, n, left, right);
+        int minIndex = queryMin(1, 1, n, start, end);
+        long sumNum = querySum(1, 1, n, start, end);
+        long area = arr[minIndex] * sumNum;
 
-        // 현재 구간의 합 계산
-        long area = querySum(1, 1, n, left, right) * arr[minIndex];
-
-        // 왼쪽, 오른쪽 부분 구간도 탐색
-        if(left < minIndex){
-            area = Math.max(area, findMaxScore(left, minIndex - 1));
+        if(start < minIndex){
+            area = Math.max(area, findMaxScore(start, minIndex - 1));
         }
-        if(minIndex < right){
-            area = Math.max(area, findMaxScore(minIndex + 1, right));
+        if(minIndex < end){
+            area = Math.max(area, findMaxScore(minIndex + 1, end));
         }
+
         return area;
     }
 
@@ -66,8 +65,8 @@ public class Main {
         if(left <= start && end <= right) return sumTree[node];
 
         int mid = (start + end) / 2;
-        return querySum(node * 2, start, mid, left, right) 
-             + querySum(node * 2 + 1, mid + 1, end, left, right);
+        return querySum(node * 2, start, mid, left, right)
+                + querySum(node * 2 + 1, mid + 1, end, left, right);
     }
 
     /** ✅ 세그먼트 트리 초기화 (구간 합) */
@@ -76,8 +75,8 @@ public class Main {
             return sumTree[node] = arr[start];
         }
         int mid = (start + end) / 2;
-        return sumTree[node] = buildSumTree(node * 2, start, mid) 
-                             + buildSumTree(node * 2 + 1, mid + 1, end);
+        return sumTree[node] = buildSumTree(node * 2, start, mid)
+                + buildSumTree(node * 2 + 1, mid + 1, end);
     }
 
     /** ✅ 세그먼트 트리 초기화 (구간 최소값 위치) */
@@ -100,3 +99,7 @@ public class Main {
         else return Math.min(leftMin, rightMin); // ✅ 값이 같으면 작은 인덱스 반환
     }
 }
+
+
+
+
