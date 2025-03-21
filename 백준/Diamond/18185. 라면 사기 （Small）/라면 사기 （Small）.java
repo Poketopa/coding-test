@@ -1,3 +1,5 @@
+
+
 import java.io.*;
 import java.util.*;
 
@@ -20,9 +22,19 @@ public class Main {
             // 3개 지울 수 있을 떄
             if(a > 0 && b > 0 && c > 0){
                 if(b > c && b > a){
-                    number[index]--;
-                    number[index + 1]--;
-                    sum += 5;
+                    if(c >= a){
+                        int temp = Math.min(b - c, a);
+                        number[index] -= temp;
+                        number[index + 1] -= temp;
+                        sum += 5 * temp;
+                    }
+                    else{
+                        int temp = a - c;
+                        number[index] -= temp;
+                        number[index + 1] -= temp;
+                        sum += 5 * temp;
+                    }
+
                 }
                 else{
                     int temp = Math.min(a, Math.min(b, c));
