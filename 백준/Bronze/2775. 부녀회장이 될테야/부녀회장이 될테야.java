@@ -15,6 +15,9 @@ public class Main {
             int floor = Integer.parseInt(br.readLine());
             int ho = Integer.parseInt(br.readLine());
 
+            // 0층은 1~n 고정
+            // 0호는 0으로 초기화하여 점화식
+            // 1부터 시작하면 인덱스에러
             int[][] apart = new int[floor + 1][ho + 1];
             for(int i=1;i<=ho;i++) apart[0][i] = i;
 
