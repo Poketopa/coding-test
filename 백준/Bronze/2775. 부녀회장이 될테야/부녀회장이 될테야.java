@@ -1,33 +1,29 @@
-
-
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
-    static int[] arr;
-    static long[] tree;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         //StringTokenizer st = new StringTokenizer(br.readLine());
-        int input = Integer.parseInt(br.readLine());
-        int[][] apt = new int[15][15];
-        for(int i=1;i<=15;i++) apt[0][i-1] = i;
-        for(int i=1;i<15;i++){
-            for(int j=0;j<15;j++){
-                if(j == 0) apt[i][0] = 1;
-                else apt[i][j] = apt[i][j-1] + apt[i - 1][j];
+
+        int testCast = Integer.parseInt(br.readLine());
+        for(int repeat = 0;repeat < testCast;repeat++){
+            int floor = Integer.parseInt(br.readLine());
+            int ho = Integer.parseInt(br.readLine());
+
+            int[][] apart = new int[floor + 1][ho + 1];
+            for(int i=1;i<=ho;i++) apart[0][i] = i;
+
+            for(int i=1;i<=floor;i++){
+                for(int j=1;j<=ho;j++){
+                    apart[i][j] = apart[i-1][j] + apart[i][j-1];
+                }
             }
+            System.out.println(apart[floor][ho]);
         }
-
-        for(int i=0;i<input;i++){
-            int a = Integer.parseInt(br.readLine());
-            int b = Integer.parseInt(br.readLine());
-            System.out.println(apt[a][b-1]);
-        }
-
-        bw.flush();
-        bw.close();
     }
 }
-
