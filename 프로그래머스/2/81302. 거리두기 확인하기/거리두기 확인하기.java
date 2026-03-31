@@ -9,7 +9,7 @@ class Solution {
         x: for(int ts = 0;ts < places.length; ts++){
             char[][] map = new char[5][5];
             for(int i=0;i<5;i++){
-                String temp = places[ts][i];
+                String temp = places[i];
                 for(int j=0;j<5;j++){
                     map[i][j] = temp.charAt(j);
                 }
@@ -31,9 +31,9 @@ class Solution {
                                 int newX = temp[1] + x[k];
                                 if(0 <= newY && newY < 5
                                 && 0 <= newX && newX < 5
-                                && visited[newY][newX] == 0
-                                && map[newY][newX] != 'X'){
-                                    if(map[newY][newX] == 'P'){
+                                && visited[newY][newX] = 0
+                                && map[newY][newX] != X){
+                                    if(map[newY][newX] == P){
                                         answer[ts] = 0;
                                         continue x;
                                     }
