@@ -1,96 +1,89 @@
-
-
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 public class Main {
-    static int[] arr;
-    static long[] tree;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         //StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int[] y = {1, -1, 0, 0};
+        int[] x = {0, 0, 1, -1};
+        Map<Integer, Integer> areaMap = new HashMap<>();
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int column = Integer.parseInt(st.nextToken());
         int row = Integer.parseInt(st.nextToken());
-        int[][] map = new int[column][row];
-        int[][] clone = new int[column][row];
-        for(int i=0;i<column;i++){
-            String str = br.readLine();
-            for(int j=0;j<row;j++) {
-                map[i][j] = str.charAt(j) - '0';
-                clone[i][j] = map[i][j];
+        int column = Integer.parseInt(st.nextToken());
+        int[][] map = new int[row][column];
+
+        for (int i = 0; i < row; i++) {
+            String input = br.readLine();
+            for (int j = 0; j < column; j++) {
+                map[i][j] = input.charAt(j) - '0';
             }
         }
-        int[] y = new int[]{1, -1, 0, 0};
-        int[] x = new int[]{0, 0, 1, -1};
-        Queue<int[]> queue = new LinkedList<>();
-        HashMap<Integer, Integer> hash = new HashMap<>();
-        int[][] visited = new int[column][row];
-        int count = 2;
-        for(int i=0;i<column;i++){
-            for(int j=0;j<row;j++){
-                if(clone[i][j] == 0){
-                    int many = 0;
+        int area = 2;
+        int[][] visited = new int[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (map[i][j] == 0) {
+                    int count = 1;
+                    Queue<int[]> queue = new LinkedList<>();
                     queue.add(new int[]{i, j});
                     visited[i][j] = 1;
-                    while(!queue.isEmpty()){
+                    map[i][j] = area;
+
+                    while (!queue.isEmpty()) {
                         int[] temp = queue.poll();
-                        many++;
-                        clone[temp[0]][temp[1]] = count;
-                        for(int k=0;k<4;k++){
+                        for (int k = 0; k < 4; k++) {
                             int newY = temp[0] + y[k];
                             int newX = temp[1] + x[k];
-                            if(0<=newY && newY<column
-                             &&0<=newX && newX<row
-                             &&clone[newY][newX] == 0
-                             &&visited[newY][newX] == 0){
-                                visited[newY][newX] = 1;
+                            if (0 <= newY && newY < row
+                                    && 0 <= newX && newX < column
+                                    && visited[newY][newX] == 0
+                                    && map[newY][newX] == 0) {
                                 queue.add(new int[]{newY, newX});
+                                visited[newY][newX] = 1;
+                                map[newY][newX] = area;
+                                count++;
                             }
                         }
                     }
-                    hash.put(count, many);
-                    count++;
-
+                    areaMap.put(area, count);
+                    area++;
                 }
             }
         }
-
-        Set<Integer> set = new HashSet<>();
-        for(int i=0;i<column;i++){
-            for(int j=0;j<row;j++){
-                if(map[i][j] == 1){
-                    set.clear();
-                    for(int k=0;k<4;k++){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (map[i][j] == 1) {
+                    int sum = 1;
+                    Set<Integer> set = new HashSet<>();
+                    for (int k = 0; k < 4; k++) {
                         int newY = i + y[k];
                         int newX = j + x[k];
-                        if(0<=newY && newY<column
-                         &&0<=newX && newX<row
-                         &&map[newY][newX] == 0){
-                            set.add(clone[newY][newX]);
+                        if (0 <= newY && newY < row && 0 <= newX && newX < column && map[newY][newX] > 1) {
+                            set.add(map[newY][newX]);
                         }
                     }
-                    for(int k : set){
-                        map[i][j] += hash.getOrDefault(k, 0);
+                    for (int areaId : set) {
+                        sum += areaMap.get(areaId);
                     }
-                    map[i][j] %= 10;
+                    sb.append(sum % 10);
+                } else {
+                    sb.append("0");
                 }
             }
+            sb.append("\n");
         }
-
-
-
-
-        for (int i = 0; i < column; i++) {
-            StringBuilder sb = new StringBuilder();
-            for (int j = 0; j < row; j++) {
-                sb.append(map[i][j]); // 한 줄을 먼저 만든 후
-            }
-            bw.write(sb.toString()); // 한 번에 출력
-            bw.newLine();
-        }
-        bw.flush(); // 출력 버퍼 비우기
-        bw.close(); // BufferedWriter 닫기
+        System.out.print(sb.toString());
     }
+    
 }
